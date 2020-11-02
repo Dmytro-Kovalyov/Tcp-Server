@@ -1,0 +1,9 @@
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\Debug\TcpServer.exe.config
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\Debug\TcpServer.exe
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\Debug\TcpServer.pdb
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.csprojAssemblyReference.cache
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.ProjectInstaller.resources
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.csproj.GenerateResource.cache
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.csproj.CoreCompileInputs.cache
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.exe
+D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\obj\Debug\TcpServer.pdb

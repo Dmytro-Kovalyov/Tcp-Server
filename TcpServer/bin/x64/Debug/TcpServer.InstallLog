@@ -1,0 +1,61 @@
+﻿Installing assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Installing service SysProg_Lab4...
+Creating EventLog source SysProg_Lab4 in log Application...
+Rolling back assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Restoring event log to previous state for source SysProg_Lab4.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security, State.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Installing service SysProg_Lab4...
+Creating EventLog source SysProg_Lab4 in log Application...
+Rolling back assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Restoring event log to previous state for source SysProg_Lab4.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security, State.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Installing service SysProg_Lab4...
+Creating EventLog source SysProg_Lab4 in log Application...
+Rolling back assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Restoring event log to previous state for source SysProg_Lab4.
+An exception occurred during the Rollback phase of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: The source was not found, but some or all event logs could not be searched.  Inaccessible logs: Security, State.
+An exception occurred during the Rollback phase of the installation. This exception will be ignored and the rollback will continue. However, the machine might not fully revert to its initial state after the rollback is complete.
+Installing assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
+Installing service SysProg_Lab4...
+Service SysProg_Lab4 has been successfully installed.
+Creating EventLog source SysProg_Lab4 in log Application...
+Committing assembly 'D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe'.
+Affected parameters are:
+   logtoconsole = 
+   assemblypath = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.exe
+   logfile = D:\Programming\SysProg\Labs\Lab4\TcpServer\TcpServer\bin\x64\Debug\TcpServer.InstallLog
