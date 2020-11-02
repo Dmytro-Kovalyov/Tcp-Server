@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Net;
 using System.Net.Sockets;
-using System.Xml;
+using System.Xml.Linq;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace TcpServer
 {
@@ -38,11 +34,11 @@ namespace TcpServer
             operating = false;
         }
 
-        private void SaveXml(XmlDocument document, string name)
+        private void SaveXml(XDocument document, string name)
         {
-            using (StreamWriter sw = new StreamWriter(PATH + name, true))
+            using (StreamWriter sw = new StreamWriter(PATH + name, false))
             {
-                sw.Write(document.OuterXml.ToString());
+                sw.Write(document.ToString());
             }
         }
 
@@ -64,54 +60,115 @@ namespace TcpServer
                 while (operating)
                 {
                     var tcpClient = await listener.AcceptTcpClientAsync();
-                    await HandleTcpClient(tcpClient, listener);
+                    HandleTcpClient(tcpClient, listener);
                 }
             });
         }
 
-        private async Task HandleTcpClient(TcpClient client, TcpListener listener)
+        private void HandleTcpClient(TcpClient client, TcpListener listener)
         {
-            WriteToLog("New Client");
-            XmlDocument req1 = new XmlDocument();
-            using (StreamReader sr = new StreamReader(client.GetStream()))
+            try
             {
-                req1.LoadXml(sr.ReadToEnd()); 
+                WriteToLog("New Client");
+
+                StreamReader sr = new StreamReader(client.GetStream());
+                StreamWriter sw = new StreamWriter(client.GetStream());
+
+                XDocument req1 = XDocument.Parse(sr.ReadLine());
+                SaveXml(req1, "Request-1.xml");
+
+                XDocument resp1 = CreateResponceOne(req1);
+                SaveXml(resp1, "Responce-1.xml");
+                sw.WriteLine(resp1.ToString().Replace(Environment.NewLine, ""));
+                sw.Flush();
+
+                XDocument req2 = XDocument.Parse(sr.ReadLine());
+                SaveXml(req2, "Request-2.xml");
+
+                XDocument resp2 = AuthenticateUser(req2, resp1);
+                SaveXml(resp2, "Responce-2.xml");
+                sw.WriteLine(resp2.ToString().Replace(Environment.NewLine, ""));
+                sw.Flush();
+
+                sw.Close();
+                sr.Close();
+                client.Close();
             }
-            SaveXml(req1, "Request-1.xml");
-            XmlDocument resp1 = CreateResponceOne(req1);
-            SaveXml(resp1, "Responce-1.xml");
-            XmlDocument req2 = TcpConnection(resp1, listener);
-            SaveXml(req2, "Request-2.xml");
+            catch (Exception e)
+            {
+                WriteToLog(e.Message);
+            }
         }
 
-        private XmlDocument TcpConnection(XmlDocument doc, TcpListener listener)
+        private XDocument AuthenticateUser(XDocument req2, XDocument resp1)
         {
-            var client = listener.AcceptTcpClient();
-            XmlDocument resp = new XmlDocument();
-            using (StreamWriter sw = new StreamWriter(client.GetStream()))
+            string digest = resp1.Element("body").Element("digest").Value;
+            string login = req2.Element("body").Element("login").Value;
+            string hash = req2.Element("body").Element("hash").Value;
+            Users list = new Users();
+            User user = GetUser(login, list);
+            if (user != null && CheckHash(user.pass, digest, hash))
             {
-                sw.Write(doc.OuterXml);
+                return CorrectUser(login, user.group);
             }
-            client = listener.AcceptTcpClient();
-            using (StreamReader sr = new StreamReader(client.GetStream()))
-            {
-                resp.LoadXml(sr.ReadLine());
-            }
-            return resp;
+            return LoginError();
         }
 
-        private XmlDocument CreateResponceOne(XmlDocument document)
+        private XDocument LoginError()
         {
-            XmlElement digest = document.CreateElement("digest");
-            document.AppendChild(digest);
-            XmlText randomSequence = document.CreateTextNode(GenerateDigest());
-            digest.AppendChild(randomSequence);
-            return document;
+            XDocument doc = new XDocument();
+            XElement root = new XElement("body");
+            XElement auth = new XElement("auth", "0");
+            doc.Add(root);
+            root.Add(auth);
+            return doc;
         }
 
-        private void ExctractLogin(XmlDocument doc)
+        private XDocument CorrectUser(string login, string group)
         {
+            XDocument doc = new XDocument();
+            XElement root = new XElement("body");
+            XElement auth = new XElement("auth", "1");
+            XElement groupNode = new XElement("group", group);
+            doc.Add(root);
+            root.Add(auth);
+            root.Add(groupNode);
+            return doc;
+        }
 
+        private bool CheckHash(string pass, string digest, string hash)
+        {
+            return hash == GenerateHash(pass, digest);
+        }
+
+        private string GenerateHash(string pass, string digest)
+        {
+            string concat = pass + digest;
+            var data = Encoding.UTF8.GetBytes(concat);
+            var hashData = new SHA1Managed().ComputeHash(data);
+            var hash = "";
+            foreach (var b in hashData)
+            {
+                hash += b.ToString("X2");
+            }
+            return hash;
+        }
+
+        private User GetUser(string login, Users list)
+        {
+            foreach (User user in list.users)
+            {
+                if (user.name == login) return user;
+            }
+            return null;
+        }
+
+        private XDocument CreateResponceOne(XDocument doc)
+        {
+            XElement digest = new XElement("digest", GenerateDigest());
+            XElement root = doc.Element("body");
+            root.Add(digest);
+            return doc;
         }
 
         private string GenerateDigest()
@@ -120,7 +177,6 @@ namespace TcpServer
             StringBuilder str_build = new StringBuilder();
             Random random = new Random();
             char letter;
-
             for (int i = 0; i < length; i++)
             {
                 double flt = random.NextDouble();
@@ -128,7 +184,6 @@ namespace TcpServer
                 letter = Convert.ToChar(shift + 65);
                 str_build.Append(letter);
             }
-
             return str_build.ToString();
         }
     }
